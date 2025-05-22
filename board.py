@@ -48,7 +48,7 @@ class Board:
                         moves[(jr, jc)] = (nr, nc)
         return moves
 
-
+    
     def move(self, r, c, nr, nc):
         piece = self.squares[r][c]
         self.squares[r][c] = None
