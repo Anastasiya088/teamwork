@@ -29,3 +29,21 @@ class Board:
                 x2, y2 = x1 + SQUARE_SIZE, y1 + SQUARE_SIZE
                 color = LIGHT_COLOR if (r + c) % 2 == 0 else DARK_COLOR
                 self.canvas.create_rectangle(x1, y1, x2, y2, fill=color, outline="")
+
+    def get_valid_moves(self, r, c):
+        moves = {}
+        piece = self.squares[r][c]
+        if not piece or piece.color != self.turn:
+            return moves
+        directions = [(-1, -1), (-1, 1)] if piece.color == 'red' or piece.king else []
+        directions += [(1, -1), (1, 1)] if piece.color == 'white' or piece.king else []
+        for dr, dc in directions:
+            nr, nc = r + dr, c + dc
+            if 0 <= nr < BOARD_SIZE and 0 <= nc < BOARD_SIZE:
+                if not self.squares[nr][nc]:
+                    moves[(nr, nc)] = None
+                elif self.squares[nr][nc].color != piece.color:
+                    jr, jc = nr + dr, nc + dc
+                    if 0 <= jr < BOARD_SIZE and 0 <= jc < BOARD_SIZE and not self.squares[jr][jc]:
+                        moves[(jr, jc)] = (nr, nc)
+        return moves
