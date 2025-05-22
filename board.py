@@ -47,3 +47,10 @@ class Board:
                     if 0 <= jr < BOARD_SIZE and 0 <= jc < BOARD_SIZE and not self.squares[jr][jc]:
                         moves[(jr, jc)] = (nr, nc)
         return moves
+
+
+    def move(self, r, c, nr, nc):
+        piece = self.squares[r][c]
+        self.squares[r][c] = None
+        self.squares[nr][nc] = piece
+        piece.row, piece.col = nr, nc
