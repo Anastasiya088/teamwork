@@ -117,4 +117,4 @@ def process_file(filename):
     print(f"Фігура з найбільшим периметром: {type(max_perimeter_shape).__name__} — периметр: {max_perimeter_shape.perimeter():.2f}")
 
 # Виклик функції
-process_file("Fomina_6.txt")
+process_file("fomina_6.txt")
