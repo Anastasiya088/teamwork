@@ -1,3 +1,4 @@
+from constants import BOARD_SIZE, SQUARE_SIZE
 import tkinter as tk
 from board import Board
 
