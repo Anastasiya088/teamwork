@@ -60,3 +60,17 @@ class Board:
             self.squares[jr][jc] = None
         if (piece.color=='red' and nr==0) or (piece.color=='white' and nr==BOARD_SIZE-1):
             piece.make_king()
+
+    def draw_pieces(self):
+        self.canvas.delete("piece")
+        for r in range(BOARD_SIZE):
+            for c in range(BOARD_SIZE):
+                piece = self.squares[r][c]
+                if piece:
+                    x = c * SQUARE_SIZE + SQUARE_SIZE // 2;
+                    y = r * SQUARE_SIZE + SQUARE_SIZE // 2
+                    rad = SQUARE_SIZE // 2 - 5
+                    col = RED_PIECE_COLOR if piece.color == 'red' else WHITE_PIECE_COLOR
+                    self.canvas.create_oval(x - rad, y - rad, x + rad, y + rad, fill=col, tags="piece")
+                    if piece.king:
+                        self.canvas.create_text(x, y, text="K", fill="gold", font=(None, 24), tags="piece")
