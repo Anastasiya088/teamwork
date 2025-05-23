@@ -1,4 +1,4 @@
-                     Rectangle   22    5
+                                                                  Rectangle   22    5
                  Parallelogram    0    8   21
                       Triangle   14   16    0
                       Triangle   23   21   20

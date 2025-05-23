@@ -47,3 +47,16 @@ class Board:
                     if 0 <= jr < BOARD_SIZE and 0 <= jc < BOARD_SIZE and not self.squares[jr][jc]:
                         moves[(jr, jc)] = (nr, nc)
         return moves
+
+    
+    def move(self, r, c, nr, nc):
+        piece = self.squares[r][c]
+        self.squares[r][c] = None
+        self.squares[nr][nc] = piece
+        piece.row, piece.col = nr, nc
+        jumped = self.get_valid_moves(r,c).get((nr,nc))
+        if jumped:
+            jr,jc = jumped
+            self.squares[jr][jc] = None
+        if (piece.color=='red' and nr==0) or (piece.color=='white' and nr==BOARD_SIZE-1):
+            piece.make_king()
