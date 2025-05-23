@@ -5,7 +5,6 @@ from checker import Checker
 class Board:
     def init(self, canvas):
         self.canvas = canvas
-        # Ініціалізовано поле
         self.squares = []
         for _ in range(BOARD_SIZE):
             self.squares.append([None] * BOARD_SIZE)
@@ -74,3 +73,14 @@ class Board:
                     self.canvas.create_oval(x - rad, y - rad, x + rad, y + rad, fill=col, tags="piece")
                     if piece.king:
                         self.canvas.create_text(x, y, text="K", fill="gold", font=(None, 24), tags="piece")
+
+    def check_winner(self):
+        reds=whites=0
+        for row in self.squares:
+            for piece in row:
+                if piece:
+                    reds+=piece.color=='red'
+                    whites+=piece.color=='white'
+        if reds==0: return 'White'
+        if whites==0: return 'Red'
+        return None
